@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "InstagramUi"
-include(":app")
- 
+include(":app",
+    ":library:designsystem")

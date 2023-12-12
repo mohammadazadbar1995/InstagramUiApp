@@ -1,4 +1,4 @@
-package com.inistagramUi.ui.theme
+package com.example.designsystem.theme
 
 import android.app.Activity
 import android.os.Build
