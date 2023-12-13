@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,8 +15,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -44,14 +49,11 @@ fun ProfileScreen() {
             modifier = Modifier
                 .padding(10.dp)
         )
+        Spacer(modifier = Modifier.height(4.dp))
         ProfileSection()
-        ProfileDescription(
-            displayName = "َAndroid Developer",
-            description = "Only Android and Kotlin, I love it",
-            url = "https://m.azadbar.ir",
-            followBy = listOf("Arash.Altafi", "AliIzadi"),
-            otherCount = 19
-        )
+        Spacer(modifier = Modifier.height(25.dp))
+        ButtonSection(modifier = Modifier.fillMaxWidth())
+        Spacer(modifier = Modifier.height(25.dp))
     }
 }
 
@@ -124,6 +126,14 @@ fun ProfileSection(
 
             StateSection(modifier = Modifier.weight(7f))
         }
+
+        ProfileDescription(
+            displayName = "َAndroid Developer",
+            description = "Only Android and Kotlin, I love it",
+            url = "https://m.azadbar.ir",
+            followBy = listOf("Arash.Altafi", "AliIzadi"),
+            otherCount = 19
+        )
     }
 }
 
@@ -276,6 +286,86 @@ fun ProfileDescription(
                 fontWeight = FontWeight.Normal,
             )
         }
+    }
+}
+
+@Composable
+fun ButtonSection(
+    modifier: Modifier = Modifier
+) {
+    val minWidth = 95.dp
+    val height = 30.dp
+
+    Row(
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = modifier
+    ) {
+        ActionButton(
+            modifier = Modifier
+                .defaultMinSize(minWidth = minWidth)
+                .height(height),
+            text = "Following",
+            icon = Icons.Default.KeyboardArrowDown
+        )
+
+        ActionButton(
+            modifier = Modifier
+                .defaultMinSize(minWidth = minWidth)
+                .height(height),
+            text = "Message",
+        )
+
+        ActionButton(
+            modifier = Modifier
+                .defaultMinSize(minWidth = minWidth)
+                .height(height),
+            text = "Email",
+        )
+
+
+        ActionButton(
+            modifier = Modifier
+                .size(height),
+            icon = Icons.Default.KeyboardArrowDown
+        )
+
+    }
+}
+
+
+@Composable
+fun ActionButton(
+    modifier: Modifier = Modifier,
+    text: String? = null,
+    icon: ImageVector? = null
+) {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .border(
+                width = 1.dp,
+                color = Color.LightGray,
+                shape = RoundedCornerShape(5.dp)
+            )
+            .padding(6.dp)
+    ) {
+        if (text != null) {
+            Text(
+                text = text,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 14.sp
+            )
+        }
+
+        if (icon != null) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = Color.Black,
+            )
+        }
+
     }
 }
 
